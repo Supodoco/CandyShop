@@ -4,10 +4,10 @@
 //
 //  Created by Supodoco on 25.10.2022.
 //
-
 import Foundation
 
 struct CatalogModel {
+    let id = UUID()
     let image: String
     let title: String
     let weight: Int
@@ -55,7 +55,7 @@ struct CatalogModel {
                 title: "Dabosh",
                 weight: 2300,
                 price: 3120,
-                amount: 300,
+                amount: 99,
                 description: "",
                 sales: false),
             CatalogModel(
@@ -63,7 +63,7 @@ struct CatalogModel {
                 title: "Pancake",
                 weight: 3200,
                 price: 3620,
-                amount: 2000,
+                amount: 12,
                 description: "",
                 sales: false)
         ]

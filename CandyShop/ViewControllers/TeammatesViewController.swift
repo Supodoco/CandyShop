@@ -22,7 +22,7 @@ class TeammatesViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "teammateCell",
+            withIdentifier: Cells.teammate.rawValue,
             for: indexPath) as? TeammateCell
         else { return UITableViewCell() }
         let teammate = team[indexPath.row]

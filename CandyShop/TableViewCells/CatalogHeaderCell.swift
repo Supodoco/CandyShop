@@ -13,9 +13,4 @@ class CatalogHeaderCell: UITableViewCell {
     
     @IBOutlet var clearCartButtonOutlet: UIButton!
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-     
-    }
-
 }

@@ -28,6 +28,14 @@ class CartViewController: UIViewController {
         detailVC?.cellData = data.cart[indexPath.row]
     }
     
+    @objc private func changeAmountTapped(sender: UIButton) {
+        // minus tag - 1, plus - 2
+        // data.changeAmount(id:, calculate:)
+        print(sender.tag)
+        // ограничить максимальное количество до 20
+        // tableViewOutlet.reloadData()
+    }
+    
     @objc private func clearCartPressed(sender: UIButton) {
         data.clearCart()
         let duration = 0.15
@@ -80,21 +88,38 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             tableView.isScrollEnabled = false
             return cell
         } else {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "CatalogItemCell", for: indexPath)
-            as? CatalogItemCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
+            as? CartItemCell else { return UITableViewCell() }
             let cellData = data.cart[indexPath.row]
+            
+            cell.minusButton.addTarget(
+                self,
+                action: #selector(changeAmountTapped(sender:)),
+                for: .touchUpInside
+            )
+            cell.plusButton.addTarget(
+                self,
+                action: #selector(changeAmountTapped(sender:)),
+                for: .touchUpInside
+            )
+            
             cell.titleLabel.text = cellData.title
-            cell.itemImage.image = UIImage(named: cellData.image)
-            cell.weightLabel.text = cellData.weight.formatted() + " g"
+            cell.itemImageView.image = UIImage(named: cellData.image)
             cell.amountLabel.text = cellData.amount.formatted()
+            cell.priceLabel.text = String(cellData.amount * cellData.price) + " ₽"
             return cell
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableCell(withIdentifier: "headerCell") as? CatalogHeaderCell else { return UIView() }
-        header.headerTitle.text = "Cart"
-        header.clearCartButtonOutlet.addTarget(self, action: #selector(clearCartPressed(sender:)), for: .touchUpInside)
+        guard let header = tableView.dequeueReusableCell(withIdentifier: Cells.header.rawValue) as? CatalogHeaderCell else { return UIView() }
+        header.headerTitle.text = Titles.cart.rawValue
+        
+        header.clearCartButtonOutlet.addTarget(
+            self,
+            action: #selector(clearCartPressed(sender:)),
+            for: .touchUpInside
+        )
         return header
     }
     

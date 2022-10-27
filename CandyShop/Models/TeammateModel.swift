@@ -27,14 +27,14 @@ struct Teammate {
                 position: "Senior"
             ),
             Teammate(
-                name: "Buba",
+                name: "Aleksey",
                 surname: "",
                 position: "Senior"
             ),
             Teammate(
-                name: "Somebody",
-                surname: "Some",
-                position: "Junior"
+                name: "Gennadiy",
+                surname: "Dobretsov",
+                position: "Senior"
             )
         ]
     }

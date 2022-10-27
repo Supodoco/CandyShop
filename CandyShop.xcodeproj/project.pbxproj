@@ -11,6 +11,8 @@
 		C431E994290948CE00B41F31 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E993290948CE00B41F31 /* DetailViewController.swift */; };
 		C431E9972909541900B41F31 /* Extension + UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E9962909541900B41F31 /* Extension + UIImageView.swift */; };
 		C431E9992909542600B41F31 /* hungry.gif in Resources */ = {isa = PBXBuildFile; fileRef = C431E9982909542600B41F31 /* hungry.gif */; };
+		C431E99B2909A42D00B41F31 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E99A2909A42D00B41F31 /* CartItemCell.swift */; };
+		C431E99E290A8E6700B41F31 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E99D290A8E6600B41F31 /* Enums.swift */; };
 		C4340DFF290807AB0031EC6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340DFE290807AB0031EC6F /* AppDelegate.swift */; };
 		C4340E01290807AB0031EC6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340E00290807AB0031EC6F /* SceneDelegate.swift */; };
 		C4340E06290807AB0031EC6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4340E04290807AB0031EC6F /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 		C431E993290948CE00B41F31 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		C431E9962909541900B41F31 /* Extension + UIImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension + UIImageView.swift"; sourceTree = "<group>"; };
 		C431E9982909542600B41F31 /* hungry.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = hungry.gif; sourceTree = "<group>"; };
+		C431E99A2909A42D00B41F31 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
+		C431E99D290A8E6600B41F31 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C4340DFB290807AB0031EC6F /* CandyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4340DFE290807AB0031EC6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4340E00290807AB0031EC6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +75,14 @@
 			path = Gifs;
 			sourceTree = "<group>";
 		};
+		C431E99C290A8BE400B41F31 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C470D6B429082C07007A9EFF /* DataManager.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		C4340DF2290807AB0031EC6F = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +104,7 @@
 			children = (
 				C470D6B329082AFB007A9EFF /* App */,
 				C470D6B229082AEF007A9EFF /* Models */,
+				C431E99C290A8BE400B41F31 /* Services */,
 				C470D6B129082AD2007A9EFF /* ViewControllers */,
 				C470D6B029082AC0007A9EFF /* TableViewCells */,
 				C470D6AF29082AB0007A9EFF /* Extensions */,
@@ -118,6 +131,7 @@
 			children = (
 				C4340E1429080AE70031EC6F /* TeammateCell.swift */,
 				C470D6B829083391007A9EFF /* CatalogItemCell.swift */,
+				C431E99A2909A42D00B41F31 /* CartItemCell.swift */,
 				C470D6BA290833A9007A9EFF /* CatalogHeaderCell.swift */,
 			);
 			path = TableViewCells;
@@ -139,7 +153,7 @@
 			children = (
 				C4340E162908102D0031EC6F /* TeammateModel.swift */,
 				C470D6B629082D3E007A9EFF /* CatalogModel.swift */,
-				C470D6B429082C07007A9EFF /* DataManager.swift */,
+				C431E99D290A8E6600B41F31 /* Enums.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -231,7 +245,9 @@
 				C431E99229093AA500B41F31 /* CartViewController.swift in Sources */,
 				C470D6B929083391007A9EFF /* CatalogItemCell.swift in Sources */,
 				C431E9972909541900B41F31 /* Extension + UIImageView.swift in Sources */,
+				C431E99E290A8E6700B41F31 /* Enums.swift in Sources */,
 				C4340E19290815640031EC6F /* Extension + UIView.swift in Sources */,
+				C431E99B2909A42D00B41F31 /* CartItemCell.swift in Sources */,
 				C470D6BD290833D7007A9EFF /* CatalogListViewController.swift in Sources */,
 				C470D6B729082D3E007A9EFF /* CatalogModel.swift in Sources */,
 				C470D6BB290833A9007A9EFF /* CatalogHeaderCell.swift in Sources */,

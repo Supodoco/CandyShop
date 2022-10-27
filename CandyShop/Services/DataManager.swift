@@ -26,6 +26,9 @@ class DataManager {
     var cartTotalPrice: Int {
         cart.map { $0.price * $0.amount }.reduce(0, +)
     }
+//    var favorites: [CatalogModel] {
+//        data.filter { $0.favorites }
+//    }
 
     private var data = CatalogModel.getCatalog()
     
@@ -34,6 +37,21 @@ class DataManager {
     func clearCart() {
         for (index, _) in data.enumerated() {
             data[index].amount = 0
+        }
+    }
+    
+    func changeAmount(id: UUID, calculate: Counter) {
+        for (index, item) in data.enumerated() {
+            if item.id == id {
+                switch calculate {
+                case .plus:
+                    data[index].amount += 1
+                    break
+                case .minus:
+                    data[index].amount -= 1
+                    break
+                }
+            }
         }
     }
 }

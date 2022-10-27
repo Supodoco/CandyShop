@@ -20,6 +20,13 @@ class CatalogListViewController: UIViewController {
 
     }
     
+    @objc private func buyButtonTapped(sender: UIButton) {
+        // price tag - 3 , minus - 1, plus - 2
+        // data.changeAmount(id:, calculate:)
+        print(sender.tag)
+        // ограничить максимальное количество до 20
+        // tableViewOutlet.reloadData()
+    }
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -45,7 +52,7 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: "CatalogItemCell",
+            withIdentifier: Cells.catalog.rawValue,
             for: indexPath) as? CatalogItemCell
         else { return UITableViewCell() }
         
@@ -53,6 +60,15 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         ? data.sales[indexPath.row]
         : data.catalog[indexPath.row]
     
+        // cell.priceButton.isHidden = true
+        // скрывать кнопку price по нажатию и возвращать при нулевом количестве
+        
+        cell.priceButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
+        cell.minusButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
+        cell.plusButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
+        
+        cell.amountLabel.text = cellData.amount.formatted()
+        cell.priceButton.setTitle(cellData.price.formatted() + " ₽", for: .normal)
         cell.titleLabel.text = cellData.title
         cell.weightLabel.text = cellData.weight.formatted() + " g"
         cell.itemImage.image = UIImage(named: cellData.image)
@@ -65,8 +81,10 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let header = tableView.dequeueReusableCell(withIdentifier: "headerCell") as? CatalogHeaderCell else { return UIView() }
-        header.headerTitle.text = section == 0 ? "Sales" : "Catalog"
+        guard let header = tableView.dequeueReusableCell(withIdentifier: Cells.header.rawValue) as? CatalogHeaderCell else { return UIView() }
+        header.headerTitle.text = section == 0
+        ? Titles.sales.rawValue
+        : Titles.catalog.rawValue
         return header
     }
 
