@@ -86,8 +86,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }
             tableView.isScrollEnabled = false
             return cell
-        }
-        if indexPath.row < data.cart.count {
+        } else if indexPath.row < data.cart.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
                     as? CartItemCell else { return UITableViewCell() }
             let cellData = data.cart[indexPath.row]
@@ -116,6 +115,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath)
             as? CartDeliveryCell else { return UITableViewCell() }
             cell.cellBackView.backgroundColor = .clear
+            cell.leadingLabel.text = "Доставка"
+//            cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
             // ячейка цена доставки менять значение на 0 ₽,
             // при минимальной сумме заказа
             // data.freeDeliveryMinSum
