@@ -60,12 +60,30 @@ class CatalogListViewController: UIViewController {
         
     }
     
-    @objc private func buyButtonTapped(sender: UIButton) {
-        // price tag - 3 , minus - 1, plus - 2
-        // data.changeAmount(id:, calculate:)
-        print(sender.tag)
-        // ограничить максимальное количество до 20
-        // tableViewOutlet.reloadData()
+    @objc private func buyButtonTapped(sender: UITapGestureRecognizer) {
+        guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
+        print("\(indexPath.section) section")
+        print("\(indexPath.row) row")
+        print("\(sender.view?.tag) tag")
+        
+        let currentCake = indexPath.section == 0
+        ? data.sales[indexPath.row]
+        : data.catalog[indexPath.row]
+        
+        switch sender.view?.tag {
+        case 1:
+            if currentCake.amount > 0 {
+                data.changeAmount(id: currentCake.id, calculate: .minus)
+            }
+        case 2:
+            if currentCake.amount < 20 {
+                data.changeAmount(id: currentCake.id, calculate: .plus)
+            }
+        default:
+            data.changeAmount(id: currentCake.id, calculate: .plus)
+        }
+        
+        tableViewOutlet.reloadData()
     }
     
     // MARK: - Navigation
@@ -100,12 +118,15 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         ? data.sales[indexPath.row]
         : data.catalog[indexPath.row]
     
-        // cell.priceButton.isHidden = true
+        cell.priceButton.isHidden = true
         // скрывать кнопку price по нажатию и возвращать при нулевом количестве
         
-        cell.priceButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
-        cell.minusButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
-        cell.plusButton.addTarget(self, action: #selector(buyButtonTapped(sender:)), for: .touchUpInside)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
+        let gestureTwo = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
+        let gestureThree = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
+        cell.priceButton.addGestureRecognizer(gesture)
+        cell.minusButton.addGestureRecognizer(gestureTwo)
+        cell.plusButton.addGestureRecognizer(gestureThree)
         
         cell.amountLabel.text = cellData.amount.formatted()
         cell.priceButton.setTitle(cellData.price.formatted() + " ₽", for: .normal)
@@ -130,5 +151,16 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension CatalogListViewController {
+    func returnIndexPath(for tableView: UITableView ,_ sender: UITapGestureRecognizer) -> IndexPath? {
+        let position = sender.location(in: tableView)
+        if let indexPath = tableView.indexPathForRow(at: position) {
+            return indexPath
+        } else {
+            return nil
+        }
     }
 }
