@@ -91,8 +91,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }
             tableView.isScrollEnabled = false
             return cell
-        }
-        if indexPath.row < data.cart.count {
+        } else if indexPath.row < data.cart.count {
             tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
                     as? CartItemCell else { return UITableViewCell() }
