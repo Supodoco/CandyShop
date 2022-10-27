@@ -61,11 +61,26 @@ class CatalogListViewController: UIViewController {
     }
     
     @objc private func buyButtonTapped(sender: UIButton) {
-        // price tag - 3 , minus - 1, plus - 2
-        // data.changeAmount(id:, calculate:)
-        print(sender.tag)
-        // ограничить максимальное количество до 20
-        // tableViewOutlet.reloadData()
+        guard let indexPath = tableViewOutlet.indexPathForSelectedRow else { return print("!!!") }
+        let currentCake = indexPath.section == 0
+        ? data.sales[indexPath.row]
+        : data.catalog[indexPath.row]
+        
+        switch sender.tag {
+        case 1:
+            if currentCake.amount > 0 {
+                data.changeAmount(id: currentCake.id, calculate: .minus)
+            }
+        case 2:
+            if currentCake.amount < 20 {
+                data.changeAmount(id: currentCake.id, calculate: .plus)
+            }
+        default:
+            sender.isHidden = true
+            data.changeAmount(id: currentCake.id, calculate: .plus)
+        }
+        
+        tableViewOutlet.reloadData()
     }
     
     // MARK: - Navigation
