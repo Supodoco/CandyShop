@@ -13,7 +13,6 @@ class CartViewController: UIViewController {
     
     @IBOutlet var tableViewOutlet: UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -59,7 +58,7 @@ class CartViewController: UIViewController {
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        data.cart.isEmpty ? 1 : data.cart.count
+        data.cart.isEmpty ? 1 : data.cart.count + 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,9 +86,10 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }
             tableView.isScrollEnabled = false
             return cell
-        } else {
+        }
+        if indexPath.row < data.cart.count {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
-            as? CartItemCell else { return UITableViewCell() }
+                    as? CartItemCell else { return UITableViewCell() }
             let cellData = data.cart[indexPath.row]
             
             cell.minusButton.addTarget(
@@ -107,6 +107,36 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.itemImageView.image = UIImage(named: cellData.image)
             cell.amountLabel.text = cellData.amount.formatted()
             cell.priceLabel.text = String(cellData.amount * cellData.price) + " ₽"
+            
+            return cell
+            
+        } else if indexPath.row == data.cart.count {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Cells.delivery.rawValue,
+                for: indexPath)
+            as? CartDeliveryCell else { return UITableViewCell() }
+            cell.cellBackView.backgroundColor = .clear
+            // ячейка цена доставки менять значение на 0 ₽,
+            // при минимальной сумме заказа
+            // data.freeDeliveryMinSum
+            // data.deliveryCost
+            // кастомизировать
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Cells.delivery.rawValue,
+                for: indexPath)
+            as? CartDeliveryCell else { return UITableViewCell() }
+            cell.cellBackView.backgroundColor = .systemGreen
+            cell.leadingLabel.textColor = .white
+            cell.trailingLabel.textColor = .white
+            // ячейка Оформить заказ,
+            // в trailingLabel передать общую сумму заказа
+            // data.cartTotalPrice
+            // data.freeDeliveryMinSum
+            // data.deliveryCost
+            // кастомизировать
+            // добавить addTarget c переходом на OrderViewController
             return cell
         }
     }
@@ -124,7 +154,11 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        166
+        if indexPath.row < data.cart.count {
+            return 166
+        } else {
+            return 70
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

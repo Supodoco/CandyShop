@@ -157,6 +157,33 @@
             </objects>
             <point key="canvasLocation" x="618.75" y="1286.6197183098591"/>
         </scene>
+        <!--Order View Controller-->
+        <scene sceneID="6bs-om-qfC">
+            <objects>
+                <viewController storyboardIdentifier="OrderController" id="q8q-sm-gLb" customClass="OrderViewController" customModule="CandyShop" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bFu-c7-Pv5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ваш заказ доставляется" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpc-ga-9iZ">
+                                <rect key="frame" x="63.5" y="273.5" width="193" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="3Is-cz-slE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Rpc-ga-9iZ" firstAttribute="centerY" secondItem="3Is-cz-slE" secondAttribute="centerY" id="rhC-vj-vFs"/>
+                            <constraint firstItem="Rpc-ga-9iZ" firstAttribute="centerX" secondItem="3Is-cz-slE" secondAttribute="centerX" id="vU7-Zz-7GA"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e1b-iO-3Oi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1423" y="1287"/>
+        </scene>
         <!--Cart-->
         <scene sceneID="Loo-X3-aXF">
             <objects>
@@ -322,6 +349,52 @@
                                             <outlet property="priceLabel" destination="YnJ-yu-syL" id="tnL-vq-Til"/>
                                             <outlet property="titleLabel" destination="fPd-wV-Dpn" id="45M-zA-AJA"/>
                                             <segue destination="jsV-TU-kbi" kind="presentation" id="pcG-69-POw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cartDeliveryCell" rowHeight="70" id="J04-Tw-2no" customClass="CartDeliveryCell" customModule="CandyShop" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="266" width="320" height="70"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="J04-Tw-2no" id="fNG-5W-3Rt">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="70"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcc-9W-i8y">
+                                                    <rect key="frame" x="16" y="8" width="288" height="54"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTD-Oq-ddS">
+                                                            <rect key="frame" x="227" y="15.5" width="53" height="23"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доставка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyI-so-2J6">
+                                                            <rect key="frame" x="8" y="15.5" width="87" height="23"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                    <constraints>
+                                                        <constraint firstItem="tTD-Oq-ddS" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="U4b-s6-Mwp"/>
+                                                        <constraint firstAttribute="trailing" secondItem="tTD-Oq-ddS" secondAttribute="trailing" constant="8" id="boO-Xp-jSY"/>
+                                                        <constraint firstItem="DyI-so-2J6" firstAttribute="leading" secondItem="gcc-9W-i8y" secondAttribute="leading" constant="8" id="e9f-k2-3zz"/>
+                                                        <constraint firstItem="DyI-so-2J6" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="uiG-10-MTf"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" red="0.98039215690000003" green="0.95294117649999999" blue="0.87843137250000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstItem="gcc-9W-i8y" firstAttribute="leading" secondItem="fNG-5W-3Rt" secondAttribute="leading" constant="16" id="4dC-gq-wFG"/>
+                                                <constraint firstAttribute="bottom" secondItem="gcc-9W-i8y" secondAttribute="bottom" constant="8" id="MUB-Mg-YBh"/>
+                                                <constraint firstItem="gcc-9W-i8y" firstAttribute="top" secondItem="fNG-5W-3Rt" secondAttribute="top" constant="8" id="QhW-t5-cLh"/>
+                                                <constraint firstAttribute="trailing" secondItem="gcc-9W-i8y" secondAttribute="trailing" constant="16" id="ZN9-No-1rO"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="cellBackView" destination="gcc-9W-i8y" id="Sfd-w9-9WF"/>
+                                            <outlet property="leadingLabel" destination="DyI-so-2J6" id="Bmm-ar-6YT"/>
+                                            <outlet property="trailingLabel" destination="tTD-Oq-ddS" id="aGh-mv-edq"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

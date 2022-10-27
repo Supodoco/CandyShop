@@ -11,13 +11,53 @@ class CatalogListViewController: UIViewController {
     
     @IBOutlet var tableViewOutlet: UITableView!
     
+    let viewTotalSumAndDeliveryCost = UIView()
+    let labelDelivery = UILabel()
+    let labelTotalSum = UILabel()
+    
     private let data = DataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewOutlet.separatorStyle = .none
+        tableViewOutlet.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 50, right: 0)
 
-
+        cartLabelConfigure()
+    }
+    
+    private func cartLabelConfigure() {
+        labelDelivery.translatesAutoresizingMaskIntoConstraints = false
+        labelTotalSum.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(viewTotalSumAndDeliveryCost)
+        viewTotalSumAndDeliveryCost.addSubview(labelDelivery)
+        viewTotalSumAndDeliveryCost.addSubview(labelTotalSum)
+        
+        viewTotalSumAndDeliveryCost.backgroundColor = .white
+        let viewHeight: CGFloat = 40
+        viewTotalSumAndDeliveryCost.frame = CGRect(
+            x: 0,
+            y: view.frame.height - viewHeight - (tabBarController?.tabBar.frame.height ?? 0),
+            width: view.frame.width,
+            height: viewHeight
+        )
+        
+        labelDelivery.text = "3000 ₽ до бесплатной доставки"
+        labelDelivery.font = UIFont.boldSystemFont(ofSize: 14)
+        labelDelivery.textColor = .gray
+        
+        labelTotalSum.text = "130000 ₽"
+        labelTotalSum.font = UIFont.boldSystemFont(ofSize: 17)
+        
+        NSLayoutConstraint.activate([
+            labelDelivery.leadingAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.leadingAnchor, constant: 16),
+            labelDelivery.centerYAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.centerYAnchor),
+            
+            labelTotalSum.trailingAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.trailingAnchor, constant: -16),
+            labelTotalSum.centerYAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.centerYAnchor)
+        ])
+        
+        
     }
     
     @objc private func buyButtonTapped(sender: UIButton) {

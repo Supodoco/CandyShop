@@ -22,5 +22,6 @@ enum Cells: String {
     case teammate = "teammateCell"
     case header = "headerCell"
     case catalog = "catalogItemCell"
-    case cart = "cartItemCell"    
+    case cart = "cartItemCell"
+    case delivery = "cartDeliveryCell"
 }
