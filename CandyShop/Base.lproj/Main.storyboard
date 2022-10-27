@@ -288,7 +288,7 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Uk-7c-P2T">
                                                                     <rect key="frame" x="55" y="0.0" width="28.5" height="35"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="28.5" id="WdT-ZG-Sm3"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28.5" id="WdT-ZG-Sm3"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -361,14 +361,14 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gcc-9W-i8y">
                                                     <rect key="frame" x="16" y="8" width="288" height="54"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTD-Oq-ddS">
-                                                            <rect key="frame" x="227" y="15.5" width="53" height="23"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="300000 ₽" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTD-Oq-ddS">
+                                                            <rect key="frame" x="190.5" y="15.5" width="89.5" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Доставка" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyI-so-2J6">
-                                                            <rect key="frame" x="8" y="15.5" width="87" height="23"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Оформить заказ" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DyI-so-2J6">
+                                                            <rect key="frame" x="8" y="15.5" width="153.5" height="23"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -376,6 +376,7 @@
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
+                                                        <constraint firstItem="tTD-Oq-ddS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DyI-so-2J6" secondAttribute="trailing" constant="29" id="IsT-k9-aj0"/>
                                                         <constraint firstItem="tTD-Oq-ddS" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="U4b-s6-Mwp"/>
                                                         <constraint firstAttribute="trailing" secondItem="tTD-Oq-ddS" secondAttribute="trailing" constant="8" id="boO-Xp-jSY"/>
                                                         <constraint firstItem="DyI-so-2J6" firstAttribute="leading" secondItem="gcc-9W-i8y" secondAttribute="leading" constant="8" id="e9f-k2-3zz"/>
@@ -449,7 +450,7 @@
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UKM-3W-YYd" secondAttribute="trailing" constant="20" symbolic="YES" id="b2C-mS-mpa"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="UKM-3W-YYd" secondAttribute="trailing" constant="234.5" id="q0H-cT-86c"/>
                                                 <constraint firstItem="UKM-3W-YYd" firstAttribute="centerY" secondItem="wjw-hl-uxG" secondAttribute="centerY" id="vIz-1P-3dG"/>
                                                 <constraint firstItem="UKM-3W-YYd" firstAttribute="leading" secondItem="wjw-hl-uxG" secondAttribute="leading" constant="16" id="vyh-lj-0Z7"/>
                                             </constraints>
@@ -476,7 +477,7 @@
                                                                 <constraint firstAttribute="width" constant="128" id="XNr-2m-G5b"/>
                                                             </constraints>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Napoleon napoleon napoleon" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhm-vo-sfX">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Napoleon napoleon" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vhm-vo-sfX">
                                                             <rect key="frame" x="142" y="8" width="139" height="45.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                             <nil key="textColor"/>
@@ -513,7 +514,7 @@
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="36o-Eh-NzO">
                                                                     <rect key="frame" x="55" y="0.0" width="28.5" height="35"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="28.5" id="OMA-sa-p2G"/>
+                                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="28.5" id="OMA-sa-p2G"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -544,7 +545,7 @@
                                                             <rect key="frame" x="142" y="99" width="139" height="36"/>
                                                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" constant="139" id="5uV-v2-wUt"/>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="139" id="5uV-v2-wUt"/>
                                                                 <constraint firstAttribute="height" constant="36" id="T5J-nm-qcM"/>
                                                             </constraints>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -564,6 +565,7 @@
                                                         <constraint firstItem="qwh-Hf-UmT" firstAttribute="top" secondItem="BYq-60-ire" secondAttribute="top" constant="8" id="Xhw-AZ-rzq"/>
                                                         <constraint firstItem="qwh-Hf-UmT" firstAttribute="leading" secondItem="BYq-60-ire" secondAttribute="leading" constant="8" id="a5N-vW-k3D"/>
                                                         <constraint firstAttribute="bottom" secondItem="DO4-oj-9QM" secondAttribute="bottom" constant="9" id="akO-tl-Sbt"/>
+                                                        <constraint firstItem="DO4-oj-9QM" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qwh-Hf-UmT" secondAttribute="trailing" constant="6" id="ftt-RY-0yr"/>
                                                         <constraint firstAttribute="bottom" secondItem="qwh-Hf-UmT" secondAttribute="bottom" constant="8" id="gwB-Jh-DdS"/>
                                                         <constraint firstItem="s37-7M-fRF" firstAttribute="top" secondItem="Vhm-vo-sfX" secondAttribute="bottom" constant="8" symbolic="YES" id="spD-a1-wpZ"/>
                                                         <constraint firstItem="Vhm-vo-sfX" firstAttribute="leading" secondItem="qwh-Hf-UmT" secondAttribute="trailing" constant="6" id="z95-Ye-oRZ"/>
@@ -623,7 +625,7 @@
                     <tabBarItem key="tabBarItem" title="Team" image="person.3.fill" catalog="system" id="R2e-JV-NBf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="acm-Iw-f5Q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -637,7 +639,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="jPd-6u-DHz"/>
+        <segue reference="pcG-69-POw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>

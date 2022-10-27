@@ -22,7 +22,7 @@ struct CatalogModel {
                 image: "img2",
                 title: "Napoleon",
                 weight: 1300,
-                price: 1780,
+                price: 17800,
                 amount: 0,
                 description: "",
                 sales: true),
