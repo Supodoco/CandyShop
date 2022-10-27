@@ -25,6 +25,10 @@ class CatalogListViewController: UIViewController {
         cartLabelConfigure()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewOutlet.reloadData()
+    }
+    
     private func cartLabelConfigure() {
         labelDelivery.translatesAutoresizingMaskIntoConstraints = false
         labelTotalSum.translatesAutoresizingMaskIntoConstraints = false
@@ -34,6 +38,7 @@ class CatalogListViewController: UIViewController {
         viewTotalSumAndDeliveryCost.addSubview(labelTotalSum)
         
         viewTotalSumAndDeliveryCost.backgroundColor = .white
+        
         let viewHeight: CGFloat = 40
         viewTotalSumAndDeliveryCost.frame = CGRect(
             x: 0,
@@ -59,6 +64,11 @@ class CatalogListViewController: UIViewController {
         
         
     }
+    private func getCurrentCake(_ indexPath: IndexPath) -> CatalogModel {
+        indexPath.section == 0
+        ? data.sales[indexPath.row]
+        : data.catalog[indexPath.row]
+    }
     
     @objc private func buyButtonTapped(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
@@ -66,9 +76,7 @@ class CatalogListViewController: UIViewController {
         print("\(indexPath.row) row")
         print("\(sender.view?.tag) tag")
         
-        let currentCake = indexPath.section == 0
-        ? data.sales[indexPath.row]
-        : data.catalog[indexPath.row]
+        let currentCake = getCurrentCake(indexPath)
         
         switch sender.view?.tag {
         case 1:
@@ -82,7 +90,7 @@ class CatalogListViewController: UIViewController {
         default:
             data.changeAmount(id: currentCake.id, calculate: .plus)
         }
-        
+
         tableViewOutlet.reloadData()
     }
     
@@ -114,12 +122,13 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
             for: indexPath) as? CatalogItemCell
         else { return UITableViewCell() }
         
-        let cellData = indexPath.section == 0
-        ? data.sales[indexPath.row]
-        : data.catalog[indexPath.row]
+        let currentCake = getCurrentCake(indexPath)
     
-        cell.priceButton.isHidden = true
-        // скрывать кнопку price по нажатию и возвращать при нулевом количестве
+        if currentCake.amount == 0 {
+            cell.priceButton.isHidden = false
+        } else {
+            cell.priceButton.isHidden = true
+        }
         
         let gesture = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
         let gestureTwo = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
@@ -128,11 +137,11 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         cell.minusButton.addGestureRecognizer(gestureTwo)
         cell.plusButton.addGestureRecognizer(gestureThree)
         
-        cell.amountLabel.text = cellData.amount.formatted()
-        cell.priceButton.setTitle(cellData.price.formatted() + " ₽", for: .normal)
-        cell.titleLabel.text = cellData.title
-        cell.weightLabel.text = cellData.weight.formatted() + " g"
-        cell.itemImage.image = UIImage(named: cellData.image)
+        cell.amountLabel.text = currentCake.amount.formatted()
+        cell.priceButton.setTitle(currentCake.price.formatted() + " ₽", for: .normal)
+        cell.titleLabel.text = currentCake.title
+        cell.weightLabel.text = currentCake.weight.formatted() + " g"
+        cell.itemImage.image = UIImage(named: currentCake.image)
 
         return cell
     }
@@ -151,16 +160,5 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
-
-extension CatalogListViewController {
-    func returnIndexPath(for tableView: UITableView ,_ sender: UITapGestureRecognizer) -> IndexPath? {
-        let position = sender.location(in: tableView)
-        if let indexPath = tableView.indexPathForRow(at: position) {
-            return indexPath
-        } else {
-            return nil
-        }
     }
 }

@@ -26,9 +26,6 @@ class DataManager {
     var cartTotalPrice: Int {
         cart.map { $0.price * $0.amount }.reduce(0, +)
     }
-//    var favorites: [CatalogModel] {
-//        data.filter { $0.favorites }
-//    }
 
     private var data = CatalogModel.getCatalog()
     

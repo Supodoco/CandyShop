@@ -10,7 +10,6 @@ import UIKit
 extension UIImageView {
     static func fromGif(frame: CGRect, resourceName: String) -> UIImageView? {
         guard let path = Bundle.main.path(forResource: resourceName, ofType: "gif") else {
-            print("Gif does not exist at that path")
             return nil
         }
         let url = URL(fileURLWithPath: path)

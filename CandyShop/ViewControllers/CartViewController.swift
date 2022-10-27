@@ -20,6 +20,10 @@ class CartViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewOutlet.reloadData()
+    }
+    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? DetailViewController
@@ -27,10 +31,11 @@ class CartViewController: UIViewController {
         detailVC?.cellData = data.cart[indexPath.row]
     }
     
-    @objc private func changeAmountTapped(sender: UIButton) {
+    @objc private func changeAmountTapped(sender: UITapGestureRecognizer) {
         // minus tag - 1, plus - 2
         // data.changeAmount(id:, calculate:)
-        print(sender.tag)
+        let indexPath = returnIndexPath(for: tableViewOutlet, sender)
+        print(sender.view?.tag)
         // ограничить максимальное количество до 20
         // tableViewOutlet.reloadData()
     }
@@ -86,21 +91,24 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }
             tableView.isScrollEnabled = false
             return cell
-        } else if indexPath.row < data.cart.count {
+        }
+        if indexPath.row < data.cart.count {
+            tableView.isScrollEnabled = true
             guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
                     as? CartItemCell else { return UITableViewCell() }
             let cellData = data.cart[indexPath.row]
             
-            cell.minusButton.addTarget(
-                self,
-                action: #selector(changeAmountTapped(sender:)),
-                for: .touchUpInside
+            let gestureOne = UITapGestureRecognizer(
+                target: self,
+                action: #selector(changeAmountTapped(sender:))
             )
-            cell.plusButton.addTarget(
-                self,
-                action: #selector(changeAmountTapped(sender:)),
-                for: .touchUpInside
+            let gestureTwo = UITapGestureRecognizer(
+                target: self,
+                action: #selector(changeAmountTapped(sender:))
             )
+            
+            cell.plusButton.addGestureRecognizer(gestureOne)
+            cell.minusButton.addGestureRecognizer(gestureTwo)
             
             cell.titleLabel.text = cellData.title
             cell.itemImageView.image = UIImage(named: cellData.image)
@@ -115,6 +123,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 for: indexPath)
             as? CartDeliveryCell else { return UITableViewCell() }
             cell.cellBackView.backgroundColor = .clear
+            cell.leadingLabel.textColor = .black
+            cell.trailingLabel.textColor = .black
             cell.leadingLabel.text = "Доставка"
 //            cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
             // ячейка цена доставки менять значение на 0 ₽,
@@ -131,6 +141,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellBackView.backgroundColor = .systemGreen
             cell.leadingLabel.textColor = .white
             cell.trailingLabel.textColor = .white
+            cell.leadingLabel.text = "Оформить заказ"
             // ячейка Оформить заказ,
             // в trailingLabel передать общую сумму заказа
             // data.cartTotalPrice

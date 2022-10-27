@@ -21,7 +21,7 @@ struct CatalogModel {
             CatalogModel(
                 image: "img2",
                 title: "Napoleon",
-                weight: 1300,
+                weight: 2450,
                 price: 17800,
                 amount: 0,
                 description: "",
@@ -29,8 +29,8 @@ struct CatalogModel {
             CatalogModel(
                 image: "img3",
                 title: "Napoleon",
-                weight: 1300,
-                price: 1780,
+                weight: 1600,
+                price: 2340,
                 amount: 0,
                 description: "",
                 sales: false),
@@ -38,14 +38,14 @@ struct CatalogModel {
                 image: "img4",
                 title: "Napoleon",
                 weight: 1300,
-                price: 1780,
+                price: 2180,
                 amount: 0,
                 description: "",
                 sales: false),
             CatalogModel(
                 image: "img5",
                 title: "Napoleon",
-                weight: 1300,
+                weight: 1900,
                 price: 1780,
                 amount: 0,
                 description: "",
@@ -55,7 +55,7 @@ struct CatalogModel {
                 title: "Dabosh",
                 weight: 2300,
                 price: 3120,
-                amount: 99,
+                amount: 0,
                 description: "",
                 sales: false),
             CatalogModel(
@@ -63,7 +63,7 @@ struct CatalogModel {
                 title: "Pancake",
                 weight: 3200,
                 price: 3620,
-                amount: 12,
+                amount: 0,
                 description: "",
                 sales: false)
         ]
