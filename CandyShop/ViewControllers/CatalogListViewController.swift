@@ -47,12 +47,11 @@ class CatalogListViewController: UIViewController {
             height: viewHeight
         )
         
-        labelDelivery.text = "3000 ₽ до бесплатной доставки"
         labelDelivery.font = UIFont.boldSystemFont(ofSize: 14)
         labelDelivery.textColor = .gray
-        
-        labelTotalSum.text = "130000 ₽"
+
         labelTotalSum.font = UIFont.boldSystemFont(ofSize: 17)
+        updateLabels()
         
         NSLayoutConstraint.activate([
             labelDelivery.leadingAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.leadingAnchor, constant: 16),
@@ -62,11 +61,14 @@ class CatalogListViewController: UIViewController {
             labelTotalSum.centerYAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.centerYAnchor)
         ])
         
-        updateLabels()
+        
     }
     
     private func updateLabels() {
-//        labelDelivery = "3000 ₽ до бесплатной доставки"
+        let deltaSum = data.freeDeliveryMinSum - data.deliveryCost -  data.cartTotalPrice
+        labelDelivery.text = deltaSum > 0
+            ? "\(deltaSum) ₽ до бесплатной доставки"
+            : "Бесплатная доставка"
         labelTotalSum.text = "\(data.cartTotalPrice) ₽"
     }
     
