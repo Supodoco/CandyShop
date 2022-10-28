@@ -143,9 +143,9 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         addGesture(button: cell.favoriteButton, action: #selector(changeFavorite(sender:)))
         
         cell.amountLabel.text = currentCake.amount.formatted()
-        cell.priceButton.setTitle(currentCake.price.formatted() + " ₽", for: .normal)
+        cell.priceButton.setTitle("\(currentCake.price) ₽", for: .normal)
         cell.titleLabel.text = currentCake.title
-        cell.weightLabel.text = currentCake.weight.formatted() + " г"
+        cell.weightLabel.text = "\(currentCake.weight) г"
         cell.itemImage.image = UIImage(named: currentCake.image)
 
         return cell
