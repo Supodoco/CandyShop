@@ -87,25 +87,19 @@ class CatalogListViewController: UIViewController {
         print("\(sender.view?.tag) tag")
         
         let currentCake = getCurrentCake(indexPath)
+        guard let tag = sender.view?.tag else { return }
+        data.calculateAmount(tag: tag, currentCake: currentCake)
         
-        switch sender.view?.tag {
-        case 1:
-            if currentCake.amount > 0 {
-                data.changeAmount(id: currentCake.id, calculate: .minus)
-            }
-        case 2:
-            if currentCake.amount < 20 {
-                data.changeAmount(id: currentCake.id, calculate: .plus)
-            }
-        default:
-            data.changeAmount(id: currentCake.id, calculate: .plus)
-        }
-
         tableViewOutlet.reloadData()
         updateLabels()
     }
     
-    // MARK: - Navigation
+    @objc private func changeFavorite(sender: UITapGestureRecognizer) {
+        guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
+        print(indexPath.row)
+//         data.changeFavorite(id:)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? DetailViewController
         guard let indexPath = tableViewOutlet.indexPathForSelectedRow else { return }
@@ -141,17 +135,16 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
             cell.priceButton.isHidden = true
         }
         
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
-        let gestureTwo = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
-        let gestureThree = UITapGestureRecognizer(target: self, action: #selector(buyButtonTapped(sender:)))
-        cell.priceButton.addGestureRecognizer(gesture)
-        cell.minusButton.addGestureRecognizer(gestureTwo)
-        cell.plusButton.addGestureRecognizer(gestureThree)
+        addGesture(button: cell.plusButton, action: #selector(buyButtonTapped(sender:)))
+        addGesture(button: cell.minusButton, action: #selector(buyButtonTapped(sender:)))
+        addGesture(button: cell.priceButton, action: #selector(buyButtonTapped(sender:)))
+        
+        addGesture(button: cell.favoriteButton, action: #selector(changeFavorite(sender:)))
         
         cell.amountLabel.text = currentCake.amount.formatted()
         cell.priceButton.setTitle(currentCake.price.formatted() + " ₽", for: .normal)
         cell.titleLabel.text = currentCake.title
-        cell.weightLabel.text = currentCake.weight.formatted() + " g"
+        cell.weightLabel.text = currentCake.weight.formatted() + " г"
         cell.itemImage.image = UIImage(named: currentCake.image)
 
         return cell
