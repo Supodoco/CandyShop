@@ -8,9 +8,10 @@
 import Foundation
 
 enum Titles: String {
-    case sales = "Sales"
-    case catalog = "Catalog"
-    case cart = "Cart"
+    case sales = "Акции"
+    case catalog = "Каталог"
+    case cart = "Корзина"
+    case favorite = "Избранное"
 }
 
 enum Counter {

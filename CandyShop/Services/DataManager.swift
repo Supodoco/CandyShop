@@ -26,6 +26,9 @@ class DataManager {
     var cartTotalPrice: Int {
         cart.map { $0.price * $0.amount }.reduce(0, +)
     }
+    var favorites: [CatalogModel] {
+        data.filter { $0.favorite }
+    }
 
     private var data = CatalogModel.getCatalog()
     
@@ -48,6 +51,28 @@ class DataManager {
                     data[index].amount -= 1
                     break
                 }
+            }
+        }
+    }
+    func calculateAmount(tag: Int, currentCake: CatalogModel) {
+        switch tag {
+        case 1:
+            if currentCake.amount > 0 {
+                changeAmount(id: currentCake.id, calculate: .minus)
+            }
+        case 2:
+            if currentCake.amount < 20 {
+                changeAmount(id: currentCake.id, calculate: .plus)
+            }
+        default:
+            changeAmount(id: currentCake.id, calculate: .plus)
+        }
+    }
+    func changeFavorite(id: UUID) {
+        for (index, item) in data.enumerated() {
+            if item.id == id {
+                data[index].favorite.toggle()
+                break
             }
         }
     }

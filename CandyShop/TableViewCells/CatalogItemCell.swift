@@ -15,6 +15,8 @@ class CatalogItemCell: UITableViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var weightLabel: UILabel!
     
+    @IBOutlet var favoriteButton: UIButton!
+    
     @IBOutlet var minusButton: UIButton!
     @IBOutlet var plusButton: UIButton!
     @IBOutlet var amountLabel: UILabel!

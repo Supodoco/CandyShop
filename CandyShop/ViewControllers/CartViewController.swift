@@ -97,17 +97,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                     as? CartItemCell else { return UITableViewCell() }
             let cellData = data.cart[indexPath.row]
             
-            let gestureOne = UITapGestureRecognizer(
-                target: self,
-                action: #selector(changeAmountTapped(sender:))
-            )
-            let gestureTwo = UITapGestureRecognizer(
-                target: self,
-                action: #selector(changeAmountTapped(sender:))
-            )
-            
-            cell.plusButton.addGestureRecognizer(gestureOne)
-            cell.minusButton.addGestureRecognizer(gestureTwo)
+            addGesture(button: cell.plusButton, action: #selector(changeAmountTapped(sender:)))
+            addGesture(button: cell.minusButton, action: #selector(changeAmountTapped(sender:)))
             
             cell.titleLabel.text = cellData.title
             cell.itemImageView.image = UIImage(named: cellData.image)

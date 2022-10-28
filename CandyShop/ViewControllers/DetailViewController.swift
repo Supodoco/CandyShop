@@ -26,7 +26,7 @@ class DetailViewController: UIViewController {
         titleLabel.text = cellData.title
         
         descriptionLabel.text =
-        cellData.weight.formatted() + " g · " + cellData.description
+        cellData.weight.formatted() + " г · " + cellData.description
         
     }
     

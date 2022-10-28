@@ -15,6 +15,7 @@ struct CatalogModel {
     var amount: Int
     let description: String
     let sales: Bool
+    var favorite: Bool = false
     
     static func getCatalog() -> [CatalogModel] {
         [
@@ -25,7 +26,8 @@ struct CatalogModel {
                 price: 1780,
                 amount: 0,
                 description: "",
-                sales: true),
+                sales: true,
+                favorite: true),
             CatalogModel(
                 image: "img3",
                 title: "Napoleon",
@@ -33,7 +35,8 @@ struct CatalogModel {
                 price: 2340,
                 amount: 0,
                 description: "",
-                sales: false),
+                sales: false,
+                favorite: true),
             CatalogModel(
                 image: "img4",
                 title: "Napoleon",
