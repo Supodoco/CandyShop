@@ -24,7 +24,6 @@ class CartViewController: UIViewController {
         tableViewOutlet.reloadData()
     }
     
-    // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? DetailViewController
         guard let indexPath = tableViewOutlet.indexPathForSelectedRow else { return }
@@ -32,12 +31,13 @@ class CartViewController: UIViewController {
     }
     
     @objc private func changeAmountTapped(sender: UITapGestureRecognizer) {
-        // minus tag - 1, plus - 2
-        // data.changeAmount(id:, calculate:)
-        let indexPath = returnIndexPath(for: tableViewOutlet, sender)
-        print(sender.view?.tag)
-        // ограничить максимальное количество до 20
-        // tableViewOutlet.reloadData()
+        guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
+        
+        let currentCake = data.cart[indexPath.row]
+        guard let tag = sender.view?.tag else { return }
+        data.calculateAmount(tag: tag, currentCake: currentCake)
+        
+        tableViewOutlet.reloadData()
     }
     
     @objc private func clearCartPressed(sender: UIButton) {
@@ -138,7 +138,11 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.leadingLabel.textColor = .white
             cell.trailingLabel.textColor = .white
             cell.leadingLabel.text = "Оформить заказ"
-            cell.trailingLabel.text = "\(data.cartTotalPrice) ₽"
+            if data.cartTotalPrice > data.freeDeliveryMinSum {
+                cell.trailingLabel.text = "\(data.cartTotalPrice) ₽"
+            } else {
+                cell.trailingLabel.text = "\(data.cartTotalPrice + data.deliveryCost) ₽"
+            }
             addGesture(button: cell, action: #selector(approveOrder))
             return cell
         }
