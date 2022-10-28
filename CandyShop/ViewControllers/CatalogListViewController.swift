@@ -87,10 +87,10 @@ class CatalogListViewController: UIViewController {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
         print("\(indexPath.section) section")
         print("\(indexPath.row) row")
-//        print("\(sender.view?.tag) tag")
         
         let currentCake = getCurrentCake(indexPath)
         guard let tag = sender.view?.tag else { return }
+        print("\(tag) tag")
         data.calculateAmount(tag: tag, currentCake: currentCake)
         
         tableViewOutlet.reloadData()
@@ -99,8 +99,9 @@ class CatalogListViewController: UIViewController {
     
     @objc private func changeFavorite(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
-        print(indexPath.row)
-//         data.changeFavorite(id:)
+        let currentCake = getCurrentCake(indexPath)
+        data.changeFavorite(id: currentCake.id)
+        tableViewOutlet.reloadData()
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -132,10 +133,13 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         
         let currentCake = getCurrentCake(indexPath)
     
-        if currentCake.amount == 0 {
-            cell.priceButton.isHidden = false
+        cell.priceButton.isHidden = currentCake.amount == 0 ? false : true
+        
+        let img = cell.favoriteButton.imageView?.image
+        if currentCake.favorite {
+            cell.favoriteButton.setImage(img?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
         } else {
-            cell.priceButton.isHidden = true
+            cell.favoriteButton.setImage(img?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
         }
         
         addGesture(button: cell.plusButton, action: #selector(buyButtonTapped(sender:)))

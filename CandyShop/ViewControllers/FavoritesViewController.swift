@@ -42,7 +42,9 @@ class FavoritesViewController: UIViewController {
     @objc private func changeFavorite(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
         print(indexPath.row)
-//         data.changeFavorite(id:)
+        let currentCake = data.favorites[indexPath.row]
+        data.changeFavorite(id: currentCake.id)
+        tableViewOutlet.reloadData()
     }
 
 }
@@ -60,10 +62,13 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         
         let currentCake = data.favorites[indexPath.row]
         
-        if currentCake.amount == 0 {
-            cell.priceButton.isHidden = false
+        cell.priceButton.isHidden = currentCake.amount == 0 ? false : true
+        
+        let img = cell.favoriteButton.imageView?.image
+        if currentCake.favorite {
+            cell.favoriteButton.setImage(img?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
         } else {
-            cell.priceButton.isHidden = true
+            cell.favoriteButton.setImage(img?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
         }
         
         cell.amountLabel.text = currentCake.amount.formatted()
