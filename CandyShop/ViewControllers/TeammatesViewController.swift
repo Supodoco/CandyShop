@@ -29,14 +29,13 @@ class TeammatesViewController: UITableViewController {
         cell.teammateImage.image = UIImage(named: teammate.image)
         cell.fullnameLabel.text = teammate.fullname
         cell.positionLabel.text = teammate.position
+        let backView = UIView()
+        backView.backgroundColor = .white
+        cell.selectedBackgroundView = backView
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         312
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

@@ -85,7 +85,7 @@ class CatalogListViewController: UIViewController {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
         print("\(indexPath.section) section")
         print("\(indexPath.row) row")
-        print("\(sender.view?.tag) tag")
+//        print("\(sender.view?.tag) tag")
         
         let currentCake = getCurrentCake(indexPath)
         guard let tag = sender.view?.tag else { return }
