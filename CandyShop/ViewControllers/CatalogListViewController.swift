@@ -27,6 +27,7 @@ class CatalogListViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         tableViewOutlet.reloadData()
+        updateLabels()
     }
     
     private func cartLabelConfigure() {
