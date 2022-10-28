@@ -62,8 +62,14 @@ class CatalogListViewController: UIViewController {
             labelTotalSum.centerYAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.centerYAnchor)
         ])
         
-        
+        updateLabels()
     }
+    
+    private func updateLabels() {
+//        labelDelivery = "3000 ₽ до бесплатной доставки"
+        labelTotalSum.text = "\(data.cartTotalPrice) ₽"
+    }
+    
     private func getCurrentCake(_ indexPath: IndexPath) -> CatalogModel {
         indexPath.section == 0
         ? data.sales[indexPath.row]
@@ -92,6 +98,7 @@ class CatalogListViewController: UIViewController {
         }
 
         tableViewOutlet.reloadData()
+        updateLabels()
     }
     
     // MARK: - Navigation
