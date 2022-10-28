@@ -66,11 +66,13 @@ class CatalogListViewController: UIViewController {
     }
     
     private func updateLabels() {
-        let deltaSum = data.freeDeliveryMinSum - data.deliveryCost - data.cartTotalPrice
+        let deltaSum = data.freeDeliveryMinSum - data.cartTotalPrice
         labelDelivery.text = deltaSum > 0
             ? "\(deltaSum) ₽ до бесплатной доставки"
             : "Бесплатная доставка"
-        labelTotalSum.text = "\(data.cartTotalPrice) ₽"
+        labelTotalSum.text = data.cartTotalPrice > data.freeDeliveryMinSum
+        ? "\(data.cartTotalPrice) ₽"
+        : "\(data.cartTotalPrice + data.deliveryCost) ₽"
         
         viewTotalSumAndDeliveryCost.isHidden = data.cartTotalPrice == 0
     }
