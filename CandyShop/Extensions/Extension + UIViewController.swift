@@ -17,7 +17,7 @@ extension UIViewController {
         }
     }
     
-    func addGesture(button: UIButton, action: Selector?) {
+    func addGesture(button: UIView, action: Selector?) {
         let gesture = UITapGestureRecognizer(
             target: self,
             action: action

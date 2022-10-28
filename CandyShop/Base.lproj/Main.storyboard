@@ -158,10 +158,10 @@
             </objects>
             <point key="canvasLocation" x="214" y="1287"/>
         </scene>
-        <!--Order View Controller-->
+        <!--View Controller-->
         <scene sceneID="6bs-om-qfC">
             <objects>
-                <viewController storyboardIdentifier="OrderController" id="q8q-sm-gLb" customClass="OrderViewController" customModule="CandyShop" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderController" id="q8q-sm-gLb" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bFu-c7-Pv5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -869,7 +869,7 @@
                     <tabBarItem key="tabBarItem" title="Team" image="person.3.fill" catalog="system" id="R2e-JV-NBf"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="acm-Iw-f5Q">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="98.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="92.5"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

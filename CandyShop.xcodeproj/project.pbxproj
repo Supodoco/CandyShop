@@ -14,7 +14,6 @@
 		C431E99B2909A42D00B41F31 /* CartItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E99A2909A42D00B41F31 /* CartItemCell.swift */; };
 		C431E99E290A8E6700B41F31 /* Enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E99D290A8E6600B41F31 /* Enums.swift */; };
 		C431E9A0290AA50B00B41F31 /* CartDeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E99F290AA50B00B41F31 /* CartDeliveryCell.swift */; };
-		C431E9A2290AA6DC00B41F31 /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C431E9A1290AA6DC00B41F31 /* OrderViewController.swift */; };
 		C4340DFF290807AB0031EC6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340DFE290807AB0031EC6F /* AppDelegate.swift */; };
 		C4340E01290807AB0031EC6F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4340E00290807AB0031EC6F /* SceneDelegate.swift */; };
 		C4340E06290807AB0031EC6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C4340E04290807AB0031EC6F /* Main.storyboard */; };
@@ -42,7 +41,6 @@
 		C431E99A2909A42D00B41F31 /* CartItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartItemCell.swift; sourceTree = "<group>"; };
 		C431E99D290A8E6600B41F31 /* Enums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enums.swift; sourceTree = "<group>"; };
 		C431E99F290AA50B00B41F31 /* CartDeliveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartDeliveryCell.swift; sourceTree = "<group>"; };
-		C431E9A1290AA6DC00B41F31 /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
 		C4340DFB290807AB0031EC6F /* CandyShop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CandyShop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4340DFE290807AB0031EC6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C4340E00290807AB0031EC6F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -154,7 +152,6 @@
 				C470D6BC290833D7007A9EFF /* CatalogListViewController.swift */,
 				C431E993290948CE00B41F31 /* DetailViewController.swift */,
 				C431E99129093AA500B41F31 /* CartViewController.swift */,
-				C431E9A1290AA6DC00B41F31 /* OrderViewController.swift */,
 				C443CEBC290BF0CF00C6D4F9 /* FavoritesViewController.swift */,
 			);
 			path = ViewControllers;
@@ -263,7 +260,6 @@
 				C431E99B2909A42D00B41F31 /* CartItemCell.swift in Sources */,
 				C470D6BD290833D7007A9EFF /* CatalogListViewController.swift in Sources */,
 				C443CEBB290B447700C6D4F9 /* Extension + UIViewController.swift in Sources */,
-				C431E9A2290AA6DC00B41F31 /* OrderViewController.swift in Sources */,
 				C470D6B729082D3E007A9EFF /* CatalogModel.swift in Sources */,
 				C470D6BB290833A9007A9EFF /* CatalogHeaderCell.swift in Sources */,
 				C4340E01290807AB0031EC6F /* SceneDelegate.swift in Sources */,

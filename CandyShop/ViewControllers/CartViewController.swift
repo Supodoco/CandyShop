@@ -57,6 +57,13 @@ class CartViewController: UIViewController {
         }
     }
     
+    @objc private func approveOrder() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let orderVC = storyboard.instantiateViewController(
+            withIdentifier: "OrderController"
+        )
+        present(orderVC, animated: true)
+    }
 
 }
 
@@ -116,12 +123,11 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.leadingLabel.textColor = .black
             cell.trailingLabel.textColor = .black
             cell.leadingLabel.text = "Доставка"
-//            cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
-            // ячейка цена доставки менять значение на 0 ₽,
-            // при минимальной сумме заказа
-            // data.freeDeliveryMinSum
-            // data.deliveryCost
-            // кастомизировать
+            if data.cartTotalPrice > data.freeDeliveryMinSum {
+                cell.trailingLabel.text = "0 ₽"
+            } else {
+                cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
+            }
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
@@ -132,13 +138,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.leadingLabel.textColor = .white
             cell.trailingLabel.textColor = .white
             cell.leadingLabel.text = "Оформить заказ"
-            // ячейка Оформить заказ,
-            // в trailingLabel передать общую сумму заказа
-            // data.cartTotalPrice
-            // data.freeDeliveryMinSum
-            // data.deliveryCost
-            // кастомизировать
-            // добавить addTarget c переходом на OrderViewController
+            cell.trailingLabel.text = "\(data.cartTotalPrice) ₽"
+            addGesture(button: cell, action: #selector(approveOrder))
             return cell
         }
     }
@@ -156,11 +157,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row < data.cart.count {
-            return 166
-        } else {
-            return 70
-        }
+        indexPath.row < data.cart.count ? 166 : 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
