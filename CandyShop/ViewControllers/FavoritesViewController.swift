@@ -19,6 +19,9 @@ class FavoritesViewController: UIViewController {
         tableViewOutlet.separatorStyle = .none
 
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tableViewOutlet.reloadData()
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let detailVC = segue.destination as? DetailViewController
@@ -28,7 +31,12 @@ class FavoritesViewController: UIViewController {
     
     @objc private func buyButtonTapped(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
-        print(indexPath.row)
+
+        let currentCake = data.favorites[indexPath.row]
+        guard let tag = sender.view?.tag else { return }
+        data.calculateAmount(tag: tag, currentCake: currentCake)
+        
+        tableViewOutlet.reloadData()
         
     }
     @objc private func changeFavorite(sender: UITapGestureRecognizer) {
@@ -51,6 +59,12 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         ) as? CatalogItemCell else { return UITableViewCell() }
         
         let currentCake = data.favorites[indexPath.row]
+        
+        if currentCake.amount == 0 {
+            cell.priceButton.isHidden = false
+        } else {
+            cell.priceButton.isHidden = true
+        }
         
         cell.amountLabel.text = currentCake.amount.formatted()
         cell.titleLabel.text = currentCake.title
