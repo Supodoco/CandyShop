@@ -47,12 +47,11 @@ class CatalogListViewController: UIViewController {
             height: viewHeight
         )
         
-        labelDelivery.text = "3000 ₽ до бесплатной доставки"
         labelDelivery.font = UIFont.boldSystemFont(ofSize: 14)
         labelDelivery.textColor = .gray
-        
-        labelTotalSum.text = "130000 ₽"
+
         labelTotalSum.font = UIFont.boldSystemFont(ofSize: 17)
+        updateLabels()
         
         NSLayoutConstraint.activate([
             labelDelivery.leadingAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.leadingAnchor, constant: 16),
@@ -64,6 +63,17 @@ class CatalogListViewController: UIViewController {
         
         
     }
+    
+    private func updateLabels() {
+        let deltaSum = data.freeDeliveryMinSum - data.deliveryCost - data.cartTotalPrice
+        labelDelivery.text = deltaSum > 0
+            ? "\(deltaSum) ₽ до бесплатной доставки"
+            : "Бесплатная доставка"
+        labelTotalSum.text = "\(data.cartTotalPrice) ₽"
+        
+        viewTotalSumAndDeliveryCost.isHidden = data.cartTotalPrice == 0
+    }
+    
     private func getCurrentCake(_ indexPath: IndexPath) -> CatalogModel {
         indexPath.section == 0
         ? data.sales[indexPath.row]
@@ -92,6 +102,7 @@ class CatalogListViewController: UIViewController {
         }
 
         tableViewOutlet.reloadData()
+        updateLabels()
     }
     
     // MARK: - Navigation
