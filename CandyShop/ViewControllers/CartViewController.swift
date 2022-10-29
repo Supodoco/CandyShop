@@ -63,7 +63,7 @@ class CartViewController: UIViewController {
             width: infoView.frame.width - padding * 2,
             height: infoLabelHeight
         )
-        infoLabel.text = "Доставка бесплатная от \(data.freeDeliveryMinSum) ₽"
+        infoLabel.text = "Бесплатная доставка от \(data.freeDeliveryMinSum) ₽"
         infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
         infoLabel.textAlignment = .center
         infoView.addSubview(infoLabel)
