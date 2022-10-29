@@ -15,7 +15,9 @@ class TeammatesViewController: UITableViewController {
         super.viewDidLoad()
         tableView.separatorStyle = .none
     }
+}
 
+extension TeammatesViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         team.count
     }
@@ -25,13 +27,16 @@ class TeammatesViewController: UITableViewController {
             withIdentifier: Cells.teammate.rawValue,
             for: indexPath) as? TeammateCell
         else { return UITableViewCell() }
+        
         let teammate = team[indexPath.row]
         cell.teammateImage.image = UIImage(named: teammate.image)
         cell.fullnameLabel.text = teammate.fullname
         cell.positionLabel.text = teammate.position
+        
         let backView = UIView()
         backView.backgroundColor = .white
         cell.selectedBackgroundView = backView
+        
         return cell
     }
     

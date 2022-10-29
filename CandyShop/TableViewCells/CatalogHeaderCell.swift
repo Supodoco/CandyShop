@@ -10,7 +10,6 @@ import UIKit
 class CatalogHeaderCell: UITableViewCell {
 
     @IBOutlet var headerTitle: UILabel!
-    
     @IBOutlet var clearCartButtonOutlet: UIButton!
 
 }

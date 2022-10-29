@@ -30,6 +30,12 @@ class CatalogListViewController: UIViewController {
         updateLabels()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let detailVC = segue.destination as? DetailViewController
+        guard let indexPath = tableViewOutlet.indexPathForSelectedRow else { return }
+        detailVC?.cellData = getCurrentCake(indexPath)
+    }
+    
     private func cartLabelConfigure() {
         labelDelivery.translatesAutoresizingMaskIntoConstraints = false
         labelTotalSum.translatesAutoresizingMaskIntoConstraints = false
@@ -61,8 +67,6 @@ class CatalogListViewController: UIViewController {
             labelTotalSum.trailingAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.trailingAnchor, constant: -16),
             labelTotalSum.centerYAnchor.constraint(equalTo: viewTotalSumAndDeliveryCost.centerYAnchor)
         ])
-        
-        
     }
     
     private func updateLabels() {
@@ -70,7 +74,7 @@ class CatalogListViewController: UIViewController {
         labelDelivery.text = deltaSum > 0
             ? "\(deltaSum) ₽ до бесплатной доставки"
             : "Бесплатная доставка"
-        labelTotalSum.text = data.cartTotalPrice > data.freeDeliveryMinSum
+        labelTotalSum.text = data.cartTotalPrice >= data.freeDeliveryMinSum
         ? "\(data.cartTotalPrice) ₽"
         : "\(data.cartTotalPrice + data.deliveryCost) ₽"
         
@@ -85,12 +89,9 @@ class CatalogListViewController: UIViewController {
     
     @objc private func buyButtonTapped(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
-        print("\(indexPath.section) section")
-        print("\(indexPath.row) row")
         
         let currentCake = getCurrentCake(indexPath)
         guard let tag = sender.view?.tag else { return }
-        print("\(tag) tag")
         data.calculateAmount(tag: tag, currentCake: currentCake)
         
         tableViewOutlet.reloadData()
@@ -99,21 +100,12 @@ class CatalogListViewController: UIViewController {
     
     @objc private func changeFavorite(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
+        
         let currentCake = getCurrentCake(indexPath)
         data.changeFavorite(id: currentCake.id)
+        
         tableViewOutlet.reloadData()
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let detailVC = segue.destination as? DetailViewController
-        guard let indexPath = tableViewOutlet.indexPathForSelectedRow else { return }
-        if indexPath.section == 0 {
-            detailVC?.cellData = data.sales[indexPath.row]
-        } else {
-            detailVC?.cellData = data.catalog[indexPath.row]
-        }
-    }
-
 }
 
 extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -137,16 +129,22 @@ extension CatalogListViewController: UITableViewDelegate, UITableViewDataSource 
         
         let img = cell.favoriteButton.imageView?.image
         if currentCake.favorite {
-            cell.favoriteButton.setImage(img?.withTintColor(.red, renderingMode: .alwaysOriginal), for: .normal)
+            cell.favoriteButton.setImage(
+                img?.withTintColor(.red, renderingMode: .alwaysOriginal),
+                for: .normal
+            )
         } else {
-            cell.favoriteButton.setImage(img?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+            cell.favoriteButton.setImage(
+                img?.withTintColor(.black, renderingMode: .alwaysOriginal),
+                for: .normal
+            )
         }
         
-        addGesture(button: cell.plusButton, action: #selector(buyButtonTapped(sender:)))
-        addGesture(button: cell.minusButton, action: #selector(buyButtonTapped(sender:)))
-        addGesture(button: cell.priceButton, action: #selector(buyButtonTapped(sender:)))
+        addGesture(cell.plusButton, action: #selector(buyButtonTapped(sender:)))
+        addGesture(cell.minusButton, action: #selector(buyButtonTapped(sender:)))
+        addGesture(cell.priceButton, action: #selector(buyButtonTapped(sender:)))
         
-        addGesture(button: cell.favoriteButton, action: #selector(changeFavorite(sender:)))
+        addGesture(cell.favoriteButton, action: #selector(changeFavorite(sender:)))
         
         cell.amountLabel.text = currentCake.amount.formatted()
         cell.priceButton.setTitle("\(currentCake.price) ₽", for: .normal)

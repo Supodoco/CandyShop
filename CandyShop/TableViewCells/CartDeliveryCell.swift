@@ -13,11 +13,10 @@ class CartDeliveryCell: UITableViewCell {
     @IBOutlet var leadingLabel: UILabel!
     @IBOutlet var trailingLabel: UILabel!
     
+    @IBOutlet var infoButtonOutlet: UIButton!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         cellBackView.layer.cornerRadius = 10
-
     }
-
-    
 }

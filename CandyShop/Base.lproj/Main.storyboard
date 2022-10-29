@@ -113,8 +113,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,340 g  · Decription decription decription decription decription" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3g-vc-Xjs">
-                                <rect key="frame" x="16" y="362" width="288" height="41"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,340 g  · Description" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="9" baselineAdjustment="alignBaselines" minimumScaleFactor="0.80000000000000004" translatesAutoresizingMaskIntoConstraints="NO" id="O3g-vc-Xjs">
+                                <rect key="frame" x="16" y="362" width="288" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <color key="textColor" systemColor="systemGrayColor"/>
                                 <nil key="highlightedColor"/>
@@ -384,13 +384,28 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A0T-br-6DJ">
+                                                            <rect key="frame" x="169" y="14" width="26" height="26"/>
+                                                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                            <state key="normal">
+                                                                <imageReference key="image" image="info.circle" catalog="system" symbolScale="large" renderingMode="hierarchical">
+                                                                    <hierarchicalColors>
+                                                                        <color systemColor="labelColor"/>
+                                                                        <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                        <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    </hierarchicalColors>
+                                                                </imageReference>
+                                                            </state>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="tTD-Oq-ddS" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="DyI-so-2J6" secondAttribute="trailing" constant="29" id="IsT-k9-aj0"/>
                                                         <constraint firstItem="tTD-Oq-ddS" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="U4b-s6-Mwp"/>
+                                                        <constraint firstItem="A0T-br-6DJ" firstAttribute="leading" secondItem="DyI-so-2J6" secondAttribute="trailing" constant="7.5" id="W6j-uk-g4i"/>
                                                         <constraint firstAttribute="trailing" secondItem="tTD-Oq-ddS" secondAttribute="trailing" constant="8" id="boO-Xp-jSY"/>
                                                         <constraint firstItem="DyI-so-2J6" firstAttribute="leading" secondItem="gcc-9W-i8y" secondAttribute="leading" constant="8" id="e9f-k2-3zz"/>
+                                                        <constraint firstItem="A0T-br-6DJ" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="mEg-Ox-DAs"/>
                                                         <constraint firstItem="DyI-so-2J6" firstAttribute="centerY" secondItem="gcc-9W-i8y" secondAttribute="centerY" id="uiG-10-MTf"/>
                                                     </constraints>
                                                 </view>
@@ -405,6 +420,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="cellBackView" destination="gcc-9W-i8y" id="Sfd-w9-9WF"/>
+                                            <outlet property="infoButtonOutlet" destination="A0T-br-6DJ" id="fgl-9x-0oS"/>
                                             <outlet property="leadingLabel" destination="DyI-so-2J6" id="Bmm-ar-6YT"/>
                                             <outlet property="trailingLabel" destination="tTD-Oq-ddS" id="aGh-mv-edq"/>
                                         </connections>
@@ -885,7 +901,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ghT-0n-8r0"/>
+        <segue reference="pcG-69-POw"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="cart" catalog="system" width="128" height="102"/>
@@ -893,6 +909,7 @@
         <image name="delivery" width="1147" height="1147"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="heart.fill" catalog="system" width="128" height="107"/>
+        <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="person.3.fill" catalog="system" width="128" height="61"/>
         <image name="plus" catalog="system" width="128" height="113"/>

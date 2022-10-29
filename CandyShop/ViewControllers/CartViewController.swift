@@ -9,15 +9,19 @@ import UIKit
 
 class CartViewController: UIViewController {
     
-    private let data = DataManager.shared
-    
     @IBOutlet var tableViewOutlet: UITableView!
+    
+    let infoView = UIView()
+    let infoLabel = UILabel()
+    let dismissButton = UIButton()
+    let blurEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .systemThinMaterialLight))
+    
+    private let data = DataManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         tableViewOutlet.separatorStyle = .none
-
+        infoConfigure()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -30,9 +34,59 @@ class CartViewController: UIViewController {
         detailVC?.cellData = data.cart[indexPath.row]
     }
     
+    private func infoConfigure() {
+        // Blur
+        blurEffectView.frame = view.bounds
+        blurEffectView.alpha = 0
+        blurEffectView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        view.addSubview(blurEffectView)
+        addGesture(blurEffectView, action: #selector(dismissTapped))
+        
+        // BackView
+        infoView.isHidden = true
+        infoView.frame = CGRect(
+            x: view.frame.width / 2 - 140,
+            y: view.frame.height / 2 - 60,
+            width: 280,
+            height: 120
+        )
+        infoView.backgroundColor = .white
+        infoView.backConfigure()
+        view.addSubview(infoView)
+        
+        // infoLabel
+        let infoLabelHeight: CGFloat = 20
+        let padding: CGFloat = 16
+        infoLabel.frame = CGRect(
+            x: padding,
+            y: padding,
+            width: infoView.frame.width - padding * 2,
+            height: infoLabelHeight
+        )
+        infoLabel.text = "Доставка бесплатная от \(data.freeDeliveryMinSum) ₽"
+        infoLabel.font = UIFont.boldSystemFont(ofSize: 15)
+        infoLabel.textAlignment = .center
+        infoView.addSubview(infoLabel)
+        
+        // dismissButton
+        dismissButton.frame = CGRect(
+            x: padding,
+            y: padding * 2 + infoLabelHeight,
+            width: infoView.frame.width - padding * 2,
+            height: 50
+        )
+        dismissButton.backConfigure()
+        dismissButton.backgroundColor = .white
+        dismissButton.setTitle("Закрыть", for: .normal)
+        dismissButton.setTitleColor(.black, for: .normal)
+        dismissButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17)
+        dismissButton.addTarget(self, action: #selector(dismissTapped), for: .touchUpInside)
+        infoView.addSubview(dismissButton)
+    }
+    
     @objc private func changeAmountTapped(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
-        
+
         let currentCake = data.cart[indexPath.row]
         guard let tag = sender.view?.tag else { return }
         data.calculateAmount(tag: tag, currentCake: currentCake)
@@ -64,7 +118,20 @@ class CartViewController: UIViewController {
         )
         present(orderVC, animated: true)
     }
-
+    
+    @objc private func infoTapped() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            blurEffectView.alpha = 1
+            infoView.isHidden = false
+        }
+    }
+    
+    @objc private func dismissTapped() {
+        UIView.animate(withDuration: 0.3) { [unowned self] in
+            infoView.isHidden = true
+            blurEffectView.alpha = 0
+        }
+    }
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
@@ -84,12 +151,20 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             }()
             cell.backgroundColor = view.backgroundColor
             cell.addSubview(label)
-            label.frame = CGRect(x: view.frame.width / 2 - 100, y: view.frame.height / 2 + 30, width: 200, height: 50)
+            label.textAlignment = .center
+            label.frame = CGRect(
+                x: view.frame.width / 2 - 100,
+                y: view.frame.height / 2 + 30,
+                width: 200,
+                height: 50
+            )
             if let confettiImageView = UIImageView.fromGif(
                     frame: CGRect(
                         x: view.frame.width / 2 - 100,
                         y: view.frame.height / 2 - 200,
-                        width: 200, height: 200),
+                        width: 200,
+                        height: 200
+                    ),
                     resourceName: "hungry"
             ) {
                 cell.addSubview(confettiImageView)
@@ -97,15 +172,19 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 confettiImageView.startAnimating()
             }
             tableView.isScrollEnabled = false
+            
             return cell
         } else if indexPath.row < data.cart.count {
             tableView.isScrollEnabled = true
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: Cells.cart.rawValue, for: indexPath)
-                    as? CartItemCell else { return UITableViewCell() }
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: Cells.cart.rawValue,
+                for: indexPath
+            ) as? CartItemCell else { return UITableViewCell() }
+            
             let cellData = data.cart[indexPath.row]
             
-            addGesture(button: cell.plusButton, action: #selector(changeAmountTapped(sender:)))
-            addGesture(button: cell.minusButton, action: #selector(changeAmountTapped(sender:)))
+            addGesture(cell.plusButton, action: #selector(changeAmountTapped(sender:)))
+            addGesture(cell.minusButton, action: #selector(changeAmountTapped(sender:)))
             
             cell.titleLabel.text = cellData.title
             cell.itemImageView.image = UIImage(named: cellData.image)
@@ -119,31 +198,40 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 withIdentifier: Cells.delivery.rawValue,
                 for: indexPath)
             as? CartDeliveryCell else { return UITableViewCell() }
+            
+            cell.infoButtonOutlet.isHidden = false
             cell.cellBackView.backgroundColor = .clear
             cell.leadingLabel.textColor = .black
             cell.trailingLabel.textColor = .black
             cell.leadingLabel.text = "Доставка"
-            if data.cartTotalPrice > data.freeDeliveryMinSum {
+            addGesture(cell.infoButtonOutlet, action: #selector(infoTapped))
+            
+            if data.cartTotalPrice >= data.freeDeliveryMinSum {
                 cell.trailingLabel.text = "0 ₽"
             } else {
                 cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
             }
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: Cells.delivery.rawValue,
                 for: indexPath)
             as? CartDeliveryCell else { return UITableViewCell() }
+            
+            cell.infoButtonOutlet.isHidden = true
             cell.cellBackView.backgroundColor = .systemGreen
             cell.leadingLabel.textColor = .white
             cell.trailingLabel.textColor = .white
             cell.leadingLabel.text = "Оформить заказ"
-            if data.cartTotalPrice > data.freeDeliveryMinSum {
+            
+            if data.cartTotalPrice >= data.freeDeliveryMinSum {
                 cell.trailingLabel.text = "\(data.cartTotalPrice) ₽"
             } else {
                 cell.trailingLabel.text = "\(data.cartTotalPrice + data.deliveryCost) ₽"
             }
-            addGesture(button: cell, action: #selector(approveOrder))
+            
+            addGesture(cell, action: #selector(approveOrder))
             return cell
         }
     }

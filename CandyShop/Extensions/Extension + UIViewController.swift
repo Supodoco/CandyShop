@@ -17,11 +17,11 @@ extension UIViewController {
         }
     }
     
-    func addGesture(button: UIView, action: Selector?) {
+    func addGesture(_ view: UIView, action: Selector?) {
         let gesture = UITapGestureRecognizer(
             target: self,
             action: action
         )
-        button.addGestureRecognizer(gesture)
+        view.addGestureRecognizer(gesture)
     }
 }
