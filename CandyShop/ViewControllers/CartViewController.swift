@@ -249,7 +249,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        indexPath.row < data.cart.count ? 166 : 70
+        data.cart.isEmpty ? 0 : indexPath.row < data.cart.count ? 166 : 70
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
