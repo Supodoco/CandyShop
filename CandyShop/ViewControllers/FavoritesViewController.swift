@@ -34,7 +34,7 @@ class FavoritesViewController: UIViewController {
         let currentCake = data.favorites[indexPath.row]
         guard let tag = sender.view?.tag else { return }
         data.calculateAmount(tag: tag, currentCake: currentCake)
-        tableViewOutlet.reloadData()
+        tableViewOutlet.reloadRows(at: [indexPath], with: .none)
     }
     
     @objc private func changeFavorite(sender: UITapGestureRecognizer) {

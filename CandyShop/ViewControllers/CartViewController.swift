@@ -91,7 +91,7 @@ class CartViewController: UIViewController {
         guard let tag = sender.view?.tag else { return }
         data.calculateAmount(tag: tag, currentCake: currentCake)
         
-        tableViewOutlet.reloadData()
+        tableViewOutlet.reloadRows(at: [indexPath], with: .none)
     }
     
     @objc private func clearCartPressed(sender: UIButton) {
@@ -106,8 +106,8 @@ class CartViewController: UIViewController {
         UIView.animate(withDuration: duration, delay: duration * 3) {
             sender.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
-        DispatchQueue.main.asyncAfter(deadline: .now() + duration * 4) {
-            self.tableViewOutlet.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration * 4) { [unowned self] in
+            tableViewOutlet.reloadData()
         }
     }
     

@@ -94,7 +94,7 @@ class CatalogListViewController: UIViewController {
         guard let tag = sender.view?.tag else { return }
         data.calculateAmount(tag: tag, currentCake: currentCake)
         
-        tableViewOutlet.reloadData()
+        tableViewOutlet.reloadRows(at: [indexPath], with: .none)
         updateLabels()
     }
     
@@ -103,7 +103,7 @@ class CatalogListViewController: UIViewController {
         
         let currentCake = getCurrentCake(indexPath)
         data.changeFavorite(id: currentCake.id)
-        let duration = 0.1
+        let duration = 0.15
         UIView.animate(withDuration: duration) {
             sender.view?.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
         }
@@ -111,7 +111,7 @@ class CatalogListViewController: UIViewController {
             sender.view?.transform = CGAffineTransform(scaleX: 1, y: 1)
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration * 2) { [unowned self] in
-            tableViewOutlet.reloadData()
+            tableViewOutlet.reloadRows(at: [indexPath], with: .none)
         }
     }
 }
