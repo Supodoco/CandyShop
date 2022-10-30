@@ -95,18 +95,11 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
             cell.priceButton.isHidden = currentCake.amount == 0 ? false : true
             
             let img = cell.favoriteButton.imageView?.image
-            if currentCake.favorite {
-                cell.favoriteButton.setImage(
-                    img?.withTintColor(.red, renderingMode: .alwaysOriginal),
-                    for: .normal
-                )
-            } else {
-                cell.favoriteButton.setImage(
-                    img?.withTintColor(.black, renderingMode: .alwaysOriginal),
-                    for: .normal
-                )
-            }
-            
+            cell.favoriteButton.setImage(
+                img?.withTintColor(.red, renderingMode: .alwaysOriginal),
+                for: .normal
+            )
+
             cell.amountLabel.text = currentCake.amount.formatted()
             cell.titleLabel.text = currentCake.title
             cell.itemImage.image = UIImage(named: currentCake.image)
