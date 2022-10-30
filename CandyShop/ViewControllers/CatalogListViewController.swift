@@ -103,8 +103,16 @@ class CatalogListViewController: UIViewController {
         
         let currentCake = getCurrentCake(indexPath)
         data.changeFavorite(id: currentCake.id)
-        
-        tableViewOutlet.reloadData()
+        let duration = 0.1
+        UIView.animate(withDuration: duration) {
+            sender.view?.transform = CGAffineTransform(scaleX: 1.15, y: 1.15)
+        }
+        UIView.animate(withDuration: duration, delay: duration) {
+            sender.view?.transform = CGAffineTransform(scaleX: 1, y: 1)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration * 2) { [unowned self] in
+            tableViewOutlet.reloadData()
+        }
     }
 }
 
