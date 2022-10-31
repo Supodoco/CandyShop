@@ -231,13 +231,9 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.cellBackView.backgroundColor = .systemGreen
             cell.leadingLabel.textColor = .white
             cell.trailingLabel.textColor = .white
-            cell.leadingLabel.text = "Оформить заказ"
             
-            if data.cartTotalPrice >= data.freeDeliveryMinSum {
-                cell.trailingLabel.text = "\(data.cartTotalPrice) ₽"
-            } else {
-                cell.trailingLabel.text = "\(data.cartTotalPrice + data.deliveryCost) ₽"
-            }
+            cell.leadingLabel.text = "Оформить заказ"
+            cell.trailingLabel.text = data.calculateTotalSum()
             
             addGesture(cell, action: #selector(approveOrder))
             return cell

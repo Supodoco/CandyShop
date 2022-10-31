@@ -39,6 +39,7 @@ class DataManager {
             data[index].amount = 0
         }
     }
+    
     func calculateAmount(tag: Int, currentCake: CatalogModel) {
         switch tag {
         case 1:
@@ -53,6 +54,7 @@ class DataManager {
             changeAmount(id: currentCake.id, calculate: .plus)
         }
     }
+    
     func changeFavorite(id: UUID) {
         for (index, item) in data.enumerated() {
             if item.id == id {
@@ -61,6 +63,13 @@ class DataManager {
             }
         }
     }
+    
+    func calculateTotalSum() -> String {
+        cartTotalPrice >= freeDeliveryMinSum
+        ? "\(cartTotalPrice) ₽"
+        : "\(cartTotalPrice + deliveryCost) ₽"
+    }
+    
     private func changeAmount(id: UUID, calculate: Counter) {
         for (index, item) in data.enumerated() {
             if item.id == id {
