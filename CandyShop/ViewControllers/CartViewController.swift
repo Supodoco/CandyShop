@@ -91,7 +91,7 @@ class CartViewController: UIViewController {
         guard let tag = sender.view?.tag else { return }
         data.calculateAmount(tag: tag, currentCake: currentCake)
         
-        tableViewOutlet.reloadRows(at: [indexPath], with: .none)
+        tableViewOutlet.reloadData()
     }
     
     @objc private func clearCartPressed(sender: UIButton) {
