@@ -87,11 +87,13 @@ class CartViewController: UIViewController {
     @objc private func changeAmountTapped(sender: UITapGestureRecognizer) {
         guard let indexPath = returnIndexPath(for: tableViewOutlet, sender) else { return }
 
-        let currentCake = data.cart[indexPath.row]
-        guard let tag = sender.view?.tag else { return }
-        data.calculateAmount(tag: tag, currentCake: currentCake)
-        
-        tableViewOutlet.reloadData()
+        if !data.cart.isEmpty {
+            let currentCake = data.cart[indexPath.row]
+            guard let tag = sender.view?.tag else { return }
+            data.calculateAmount(tag: tag, currentCake: currentCake)
+            
+            tableViewOutlet.reloadData()
+        }
     }
     
     @objc private func clearCartPressed(sender: UIButton) {
