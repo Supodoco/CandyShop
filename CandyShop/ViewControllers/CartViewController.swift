@@ -216,6 +216,10 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 cell.trailingLabel.text = data.deliveryCost.formatted() + " ₽"
             }
             
+            if let gesture = cell.gestureRecognizers?.first {
+                cell.removeGestureRecognizer(gesture)
+            }
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(
