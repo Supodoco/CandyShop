@@ -39,21 +39,6 @@ class DataManager {
             data[index].amount = 0
         }
     }
-    
-    func changeAmount(id: UUID, calculate: Counter) {
-        for (index, item) in data.enumerated() {
-            if item.id == id {
-                switch calculate {
-                case .plus:
-                    data[index].amount += 1
-                    break
-                case .minus:
-                    data[index].amount -= 1
-                    break
-                }
-            }
-        }
-    }
     func calculateAmount(tag: Int, currentCake: CatalogModel) {
         switch tag {
         case 1:
@@ -73,6 +58,20 @@ class DataManager {
             if item.id == id {
                 data[index].favorite.toggle()
                 break
+            }
+        }
+    }
+    private func changeAmount(id: UUID, calculate: Counter) {
+        for (index, item) in data.enumerated() {
+            if item.id == id {
+                switch calculate {
+                case .plus:
+                    data[index].amount += 1
+                    break
+                case .minus:
+                    data[index].amount -= 1
+                    break
+                }
             }
         }
     }
