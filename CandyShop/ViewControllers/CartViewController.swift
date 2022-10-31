@@ -99,6 +99,7 @@ class CartViewController: UIViewController {
     @objc private func clearCartPressed(sender: UIButton) {
         data.clearCart()
         let duration = 0.15
+        tableViewOutlet.allowsSelection = false
         UIView.animate(withDuration: duration, delay: 0) {
             sender.transform = CGAffineTransform(rotationAngle: .pi/6)
         }
@@ -110,6 +111,7 @@ class CartViewController: UIViewController {
         }
         DispatchQueue.main.asyncAfter(deadline: .now() + duration * 4) { [unowned self] in
             tableViewOutlet.reloadData()
+            tableViewOutlet.allowsSelection = true
         }
     }
     
